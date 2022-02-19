@@ -1,3 +1,4 @@
+const forwarderOrigin = 'http://localhost:9010';
 
 const initialize = () => {
     const onboardButton = document.getElementById('connect');
@@ -26,9 +27,19 @@ const initialize = () => {
         }
     };
 
+    const onboarding = new MetaMaskOnboarding({forwarderOrigin});
+    const onClickInstall = () => {
+        onboardButton.innerText = 'Onboarding in progress';
+        onboardButton.disabled = true;
+        //On this object we have startOnboarding which will start the onboarding process for our end user
+        onboarding.startOnboarding();
+      };
+
     if (!isMetaMaskInstalled()){
         onboardButton.innerText = 'Click here to install MetaMask';
         console.log('prob');
+        onboardButton.click = onClickInstall;
+        onboardButton.disabled = false;
     }
     else{
         // onboardButton.innerText = 'Connect';
