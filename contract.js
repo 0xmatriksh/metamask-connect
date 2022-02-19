@@ -1,4 +1,4 @@
-const forwarderOrigin = 'http://localhost:9010';
+const forwarderOrigin = 'http://localhost:9011';
 
 const initialize = () => {
     const onboardButton = document.getElementById('connect');
@@ -27,24 +27,26 @@ const initialize = () => {
         }
     };
 
-    const onboarding = new MetaMaskOnboarding({forwarderOrigin});
+    // const onboarding = new MetaMaskOnboarding(forwarderOrigin);
+
     const onClickInstall = () => {
         onboardButton.innerText = 'Onboarding in progress';
         onboardButton.disabled = true;
-        //On this object we have startOnboarding which will start the onboarding process for our end user
-        onboarding.startOnboarding();
+        // have to setup onboarding here
+        // onboarding.startOnboarding();
+        window.open('https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn', '_blank').focus();
       };
 
     if (!isMetaMaskInstalled()){
         onboardButton.innerText = 'Click here to install MetaMask';
         console.log('prob');
-        onboardButton.click = onClickInstall;
+        onboardButton.onclick = onClickInstall;
         onboardButton.disabled = false;
     }
     else{
         // onboardButton.innerText = 'Connect';
         console.log('done')
-        onboardButton.onclick = onClickConnect();
+        onboardButton.onclick = onClickConnect;
         onboardButton.disabled = false;
 
     }
